@@ -77,7 +77,6 @@ public class auto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
-
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
             // Send calculated power to wheels
