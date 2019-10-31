@@ -28,6 +28,7 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights r
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -45,6 +46,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
+@Disabled
 
 @Autonomous(name="5619 Auto Jude", group="Linear Opmode")
 public class autoJude extends LinearOpMode {
@@ -80,15 +82,12 @@ public class autoJude extends LinearOpMode {
             leftDrive.setPower(1.0);
             rightDrive.setPower(1.0);
             sleep(1000);
-
             leftDrive.setPower(0.0);
             rightDrive.setPower(0.0);
             sleep(5000);
-
             leftDrive.setPower(-1.0);
             rightDrive.setPower(1.0);
             sleep(1150);
-
             leftDrive.setPower(0.0);
             rightDrive.setPower(0.0);
         }
