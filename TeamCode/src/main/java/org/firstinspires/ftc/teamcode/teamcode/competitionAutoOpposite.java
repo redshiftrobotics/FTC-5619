@@ -46,8 +46,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto Competition Left", group="Linear Opmode")
-public class competitionAuto extends LinearOpMode {
+@Autonomous(name="5619 Auto Competition Right", group="Linear Opmode")
+public class competitionAutoOpposite extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -77,7 +77,7 @@ public class competitionAuto extends LinearOpMode {
         motor3.setDirection(DcMotor.Direction.REVERSE);
 
         float distanceInOneSecond = (54-18);
-        float degreesInOneSecond = 200;
+        float degreesInOneSecond = 150;
 
 
 
@@ -98,7 +98,7 @@ public class competitionAuto extends LinearOpMode {
             //Drive(0,0);
             //sleep(50);
 
-            Drive(0,-1);
+            Drive(0,1);
             float rotation = (float) (90.0/degreesInOneSecond)*1000;
             sleep((long) rotation);
 
@@ -107,8 +107,8 @@ public class competitionAuto extends LinearOpMode {
             //sleep(150);
 
             Drive(1,0);
-            distance = (float) (32.0/distanceInOneSecond)*1000;
-            telemetry.addData("move 32", "(%.2f)", (float) distance);
+            distance = (float) (28.0/distanceInOneSecond)*1000;
+            telemetry.addData("move 28", "(%.2f)", (float) distance);
             telemetry.update();
             sleep( (long) distance);
 
