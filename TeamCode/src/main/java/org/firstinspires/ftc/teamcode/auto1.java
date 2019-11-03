@@ -83,11 +83,11 @@ public class auto1 extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
             // Send calculated power to wheels
-           Drive(1,1);
+           Drive(1,0);
             sleep(1000);
            Drive(0,0);
             sleep(1000);
-           Drive(1,-1);
+           Drive(0,-1);
            sleep(1000);
             Drive(0,0);
 
@@ -96,11 +96,12 @@ public class auto1 extends LinearOpMode {
 
         }
     }
-
-    void Drive(double rightPower, double leftPower){
-        motor0.setPower(leftPower);
-        motor1.setPower(rightPower);
-        motor2.setPower(leftPower);
-        motor3.setPower(rightPower);
+    void Drive(double move, double turn){
+        double leftPower = move-turn;
+        double rightPower = move+turn;
+        motor0.setPower(rightPower);
+        motor1.setPower(leftPower);
+        motor2.setPower(rightPower);
+        motor3.setPower(leftPower);
     }
 }

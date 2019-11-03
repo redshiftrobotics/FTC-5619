@@ -81,7 +81,7 @@ public class teleop extends LinearOpMode {
         motor1.setDirection(DcMotor.Direction.REVERSE);
         motor3.setDirection(DcMotor.Direction.REVERSE);
 
-        // Wait for the game to start (driver presses PLAY)
+        // Wait for the game to start (driver pesses PLAY)
         waitForStart();
         runtime.reset();
 
@@ -90,16 +90,16 @@ public class teleop extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
-            double leftPower;
-            double rightPower;
+            double move;
+            double turn;
 
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
-            leftPower = gamepad1.left_stick_y;
-            rightPower = gamepad1.right_stick_y;
+            move = -gamepad1.left_stick_y;
+            turn = gamepad1.right_stick_x;
 //            double drive = -gamepad1.left_stick_y;
 //            double turn  =  gamepad1.right_stick_x;
 //            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
@@ -111,15 +111,21 @@ public class teleop extends LinearOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            motor0.setPower(leftPower);
-            motor2.setPower(leftPower);
-            motor1.setPower(rightPower);
-            motor3.setPower(rightPower);
+            Drive(move,turn);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            telemetry.addData("Motors", "move (%.2f), turn (%.2f)", move, turn);
             telemetry.update();
         }
+    }
+
+    void Drive(double move, double turn){
+        double leftPower = move-turn;
+        double rightPower = move+turn;
+        motor0.setPower(rightPower);
+        motor1.setPower(leftPower);
+        motor2.setPower(rightPower);
+        motor3.setPower(leftPower);
     }
 }
