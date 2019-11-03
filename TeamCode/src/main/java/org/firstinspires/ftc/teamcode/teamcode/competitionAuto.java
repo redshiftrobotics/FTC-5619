@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -28,7 +28,6 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights r
  */
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -48,7 +47,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="5619 Auto Michael", group="Linear Opmode")
-public class auto1 extends LinearOpMode {
+public class competitionAuto extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -76,6 +75,10 @@ public class auto1 extends LinearOpMode {
         motor2.setDirection(DcMotor.Direction.FORWARD);
         motor1.setDirection(DcMotor.Direction.REVERSE);
         motor3.setDirection(DcMotor.Direction.REVERSE);
+        long distanceInOneSecond = 54;
+        long degreesInOneSecond = 180;
+
+
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -84,13 +87,19 @@ public class auto1 extends LinearOpMode {
         if (opModeIsActive()) {
             // Send calculated power to wheels
            Drive(1,0);
-            sleep(1000);
-           Drive(0,0);
-            sleep(5000);
-           Drive(0,-1);
-           sleep(1000);
+            sleep((10/distanceInOneSecond)*1000);
             Drive(0,0);
+            sleep(100);
 
+            Drive(0,-1);
+            sleep((90/degreesInOneSecond)*1000);
+            Drive(0,0);
+            sleep(100);
+
+            Drive(1,0);
+            sleep((10/distanceInOneSecond)*1000);
+            
+            Drive(0,0);
 
 
 

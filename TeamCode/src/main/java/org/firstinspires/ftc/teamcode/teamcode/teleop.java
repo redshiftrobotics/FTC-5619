@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -27,9 +27,10 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights r
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+package org.firstinspires.ftc.teamcode.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -47,8 +48,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto Michael", group="Linear Opmode")
-public class auto1 extends LinearOpMode {
+@TeleOp(name="5619 Teleop", group="Linear Opmode")
+public class teleop extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -77,25 +78,45 @@ public class auto1 extends LinearOpMode {
         motor1.setDirection(DcMotor.Direction.REVERSE);
         motor3.setDirection(DcMotor.Direction.REVERSE);
 
-        // Wait for the game to start (driver presses PLAY)
+        // Wait for the game to start (driver pesses PLAY)
         waitForStart();
         runtime.reset();
+
+
         // run until the end of the match (driver presses STOP)
-        if (opModeIsActive()) {
+        while (opModeIsActive()) {
+
+            // Setup a variable for each drive wheel to save power level for telemetry
+            double move;
+            double turn;
+
+            // Choose to drive using either Tank Mode, or POV Mode
+            // Comment out the method that's not used.  The default below is POV.
+
+            // POV Mode uses left stick to go forward, and right stick to turn.
+            // - This uses basic math to combine motions and is easier to drive straight.
+            move = -gamepad1.left_stick_y;
+            turn = gamepad1.right_stick_x;
+//            double drive = -gamepad1.left_stick_y;
+//            double turn  =  gamepad1.right_stick_x;
+//            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+//            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
+            // Tank Mode uses one stick to control each wheel.
+            // - This requires no math, but it is hard to drive forward slowly and keep straight.
+            // leftPower  = -gamepad1.left_stick_y ;
+            // rightPower = -gamepad1.right_stick_y ;
+
             // Send calculated power to wheels
-           Drive(1,0);
-            sleep(1000);
-           Drive(0,0);
-            sleep(5000);
-           Drive(0,-1);
-           sleep(1000);
-            Drive(0,0);
+            Drive(move,turn);
 
-
-
-
+            // Show the elapsed game time and wheel power.
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Direction", "move (%.2f), turn (%.2f)", move, turn);
+            telemetry.update();
         }
     }
+
     void Drive(double move, double turn){
         double leftPower = move-turn;
         double rightPower = move+turn;
@@ -103,5 +124,6 @@ public class auto1 extends LinearOpMode {
         motor1.setPower(leftPower);
         motor2.setPower(rightPower);
         motor3.setPower(leftPower);
+        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
     }
 }

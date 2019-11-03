@@ -115,7 +115,7 @@ public class teleop extends LinearOpMode {
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "move (%.2f), turn (%.2f)", move, turn);
+            telemetry.addData("Direction", "move (%.2f), turn (%.2f)", move, turn);
             telemetry.update();
         }
     }
@@ -127,5 +127,6 @@ public class teleop extends LinearOpMode {
         motor1.setPower(leftPower);
         motor2.setPower(rightPower);
         motor3.setPower(leftPower);
+        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
     }
 }

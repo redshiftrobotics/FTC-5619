@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -27,6 +27,8 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights r
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.firstinspires.ftc.teamcode.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -47,15 +49,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto Michael", group="Linear Opmode")
-public class auto1 extends LinearOpMode {
+@Disabled
+@Autonomous(name="5619 Auto", group="Linear Opmode")
+public class auto extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motor0 = null;
-    private DcMotor motor1 = null;
-    private DcMotor motor2 = null;
-    private DcMotor motor3 = null;
+    private DcMotor leftDrive = null;
+    private DcMotor rightDrive = null;
 
     @Override
     public void runOpMode() {
@@ -65,17 +66,13 @@ public class auto1 extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        motor0  = hardwareMap.get(DcMotor.class, "motor0");
-        motor1= hardwareMap.get(DcMotor.class, "motor1");
-        motor2  = hardwareMap.get(DcMotor.class, "motor2");
-        motor3= hardwareMap.get(DcMotor.class, "motor3");
+        leftDrive  = hardwareMap.get(DcMotor.class, "left");
+        rightDrive = hardwareMap.get(DcMotor.class, "right");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        motor0.setDirection(DcMotor.Direction.FORWARD);
-        motor2.setDirection(DcMotor.Direction.FORWARD);
-        motor1.setDirection(DcMotor.Direction.REVERSE);
-        motor3.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -83,25 +80,11 @@ public class auto1 extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
             // Send calculated power to wheels
-           Drive(1,0);
-            sleep(1000);
-           Drive(0,0);
-            sleep(5000);
-           Drive(0,-1);
-           sleep(1000);
-            Drive(0,0);
-
-
-
-
+            leftDrive.setPower(1.0);
+            rightDrive.setPower(1.0);
+            sleep(500);
+            leftDrive.setPower(0.0);
+            rightDrive.setPower(0.0);
         }
-    }
-    void Drive(double move, double turn){
-        double leftPower = move-turn;
-        double rightPower = move+turn;
-        motor0.setPower(rightPower);
-        motor1.setPower(leftPower);
-        motor2.setPower(rightPower);
-        motor3.setPower(leftPower);
     }
 }
