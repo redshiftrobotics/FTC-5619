@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
+package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -27,14 +27,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -49,9 +46,10 @@ import com.qualcomm.robotcore.util.Range;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
+@Disabled
 
-@Autonomous(name="5619 Auto", group="Linear Opmode")
-public class auto extends LinearOpMode {
+@Autonomous(name="5619 Auto Michael", group="Linear Opmode")
+public class autoMichael extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -82,9 +80,28 @@ public class auto extends LinearOpMode {
             // Send calculated power to wheels
             leftDrive.setPower(1.0);
             rightDrive.setPower(1.0);
-            sleep(500);
+            sleep(700);
             leftDrive.setPower(0.0);
             rightDrive.setPower(0.0);
+            sleep(1000);
+            rightDrive.setPower(1.0);
+            leftDrive.setPower(-1.0);
+            sleep(1150);
+            leftDrive.setPower(0.0);
+            rightDrive.setPower(0.0);
+            sleep(500);
+            rightDrive.setPower (1.0);
+            leftDrive.setPower(1.0);
+            sleep(900);
+            leftDrive.setPower(0.0);
+            rightDrive.setPower(0.0);
+
+
+
+
+
+
+
         }
     }
 }

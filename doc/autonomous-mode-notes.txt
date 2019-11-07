@@ -1,0 +1,16 @@
+Pseudo-code for autonomous mode - moving docking pad
+
+Assumes you are starting in the building zone.  Code will change prior to the dashed line for the other side.
+
+Go forward 12 inches.
+Spin 90 degrees to the left.
+Go forward 12 inches.
+Spin 90 degrees to the right.
+go forward 48 inches.
+----
+Spin (90 + 45) degrees to the right.
+Go forward 12 inches.
+Go forward 6 feet (it's assumed if we push at this angle, it will shove in the corner).
+Go backwards 6 inches.
+Go right (90 + 45) degrees.
+Go forward 3.5 feet.
