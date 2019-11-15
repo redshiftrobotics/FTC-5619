@@ -127,4 +127,26 @@ public class competitionAutoOpposite extends LinearOpMode {
         Drive(0,0);
         sleep(howlongtowait);
     }
+
+    void turn(double turndegrees){
+
+        float degreesInOneSecond = 150;
+
+        if (0 > turn){
+
+            Drive(0, -1);
+            float rotation = (float) (turn / degreesInOneSecond) * 1000;
+            sleep((long) -rotation);
+            Stop(100);
+
+        } else {
+
+            Drive(0, 1);
+            float rotation = (float) (turndegrees / degreesInOneSecond) * 1000;
+            sleep((long) rotation);
+            Stop(100);
+
+        }
+
+    }
 }
