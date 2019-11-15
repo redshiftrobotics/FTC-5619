@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -76,10 +76,19 @@ public class autoMikaal extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
             // Send calculated power to wheels
-            leftDrive.setPower(1.0);
-            rightDrive.setPower(1.0);
-            sleep(5000);
+            //leftDrive.setPower(1.0);
+            //rightDrive.setPower(1.0);
+            //sleep(5000);
 
+            moveInInches(12);
+          Turn(-90)
+moveInInches(12)
+Turn(90)
         }
+
+        public void moveInInches(int howManyInches) {}
+
+        public void Turn(int radius) {}
+        //
     }
 }
