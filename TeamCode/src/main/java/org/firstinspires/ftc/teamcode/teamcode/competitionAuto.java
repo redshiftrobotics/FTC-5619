@@ -20,7 +20,7 @@ package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, HI WOW YOU READ THIS PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -76,11 +76,6 @@ public class competitionAuto extends LinearOpMode {
         motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 
-        float distanceInOneSecond = (54-18);
-        float degreesInOneSecond = 200;
-
-
-
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -121,9 +116,27 @@ public class competitionAuto extends LinearOpMode {
         motorBackLeft.setPower(rightPower);
         motorBackRight.setPower(leftPower);
     }
+    //figure it out
     void Stop(long howlongtowait){
 
         Drive(0,0);
         sleep(howlongtowait);
     }
+    void moveInInches(double howFarToGo) {
+        float distanceInOneSecond = (54 - 18);
+        if (0 > howFarToGo) {
+            Drive(-1, 0);
+            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+            sleep((long) -distance);
+            telemetry.addData("move 10", "(%.2f)", (float) distance);
+            Stop(100);
+
+        } else {
+            Drive(1, 0);
+            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+            telemetry.addData("move 10", "(%.2f)", (float) distance);
+            Stop(100);
+        }
+    }
+
 }

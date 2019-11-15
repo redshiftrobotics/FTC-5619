@@ -51,10 +51,10 @@ public class competitionAutoOpposite extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motor0 = null;
-    private DcMotor motor1 = null;
-    private DcMotor motor2 = null;
-    private DcMotor motor3 = null;
+    private DcMotor motorFrontLeft = null;
+    private DcMotor motorFrontRight = null;
+    private DcMotor motorBackLeft = null;
+    private DcMotor motorBackRight = null;
 
     @Override
     public void runOpMode() {
@@ -64,20 +64,20 @@ public class competitionAutoOpposite extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        motor0  = hardwareMap.get(DcMotor.class, "motor0");
-        motor1= hardwareMap.get(DcMotor.class, "motor1");
-        motor2  = hardwareMap.get(DcMotor.class, "motor2");
-        motor3= hardwareMap.get(DcMotor.class, "motor3");
+        motorFrontLeft  = hardwareMap.get(DcMotor.class, "motorFrontLeft");
+        motorFrontRight= hardwareMap.get(DcMotor.class, "motorFrontRight");
+        motorBackLeft  = hardwareMap.get(DcMotor.class, "motorBackLeft");
+        motorBackRight= hardwareMap.get(DcMotor.class, "motorBackRight");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        motor0.setDirection(DcMotor.Direction.FORWARD);
-        motor2.setDirection(DcMotor.Direction.FORWARD);
-        motor1.setDirection(DcMotor.Direction.REVERSE);
-        motor3.setDirection(DcMotor.Direction.REVERSE);
+        motorFrontLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorBackLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
+        motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 
         float distanceInOneSecond = (54-18);
-        float degreesInOneSecond = 150;
+        float degreesInOneSecond = 200;
 
 
 
@@ -89,49 +89,64 @@ public class competitionAutoOpposite extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Send calculated power to wheels
-           Drive(1,0);
-           float distance = (float) ( 10.0/distanceInOneSecond)*1000;
+            Drive(1,0);
+            float distance = (float) ( 10.0/distanceInOneSecond)*1000;
             telemetry.addData("move 10", "(%.2f)", (float) distance);
             sleep( (long) distance);
 
             Stop(100);
-            //Drive(0,0);
-            //sleep(50);
 
+            //it turns.
             Drive(0,1);
             float rotation = (float) (90.0/degreesInOneSecond)*1000;
             sleep((long) rotation);
 
             Stop(150);
-            //Drive(0,0);
-            //sleep(150);
 
             Drive(1,0);
-            distance = (float) (28.0/distanceInOneSecond)*1000;
-            telemetry.addData("move 28", "(%.2f)", (float) distance);
+            distance = (float) (32.0/distanceInOneSecond)*1000;
+            telemetry.addData("move 32", "(%.2f)", (float) distance);
             telemetry.update();
             sleep( (long) distance);
 
             Stop(150);
-            //Drive(0,0);
-           // sleep(10000);
-
-
 
         }
-    }
+    }//it makes it easy to read
     void Drive(double move, double turn){
         double leftPower = move-turn;
         double rightPower = move+turn;
-        motor0.setPower(rightPower);
-        motor1.setPower(leftPower);
-        motor2.setPower(rightPower);
-        motor3.setPower(leftPower);
+        motorFrontLeft.setPower(rightPower);
+        motorFrontRight.setPower(leftPower);
+        motorBackLeft.setPower(rightPower);
+        motorBackRight.setPower(leftPower);
     }
-
+    //figure it out
     void Stop(long howlongtowait){
 
         Drive(0,0);
         sleep(howlongtowait);
+    }
+
+    void turn(double turndegrees){
+
+        float degreesInOneSecond = 150;
+
+        if (0 > turn){
+
+            Drive(0, -1);
+            float rotation = (float) (turn / degreesInOneSecond) * 1000;
+            sleep((long) -rotation);
+            Stop(100);
+
+        } else {
+
+            Drive(0, 1);
+            float rotation = (float) (turndegrees / degreesInOneSecond) * 1000;
+            sleep((long) rotation);
+            Stop(100);
+
+        }
+
     }
 }
