@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -27,10 +27,14 @@ package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -46,15 +50,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto Competition Left", group="Linear Opmode")
-public class competitionAuto extends LinearOpMode {
+@Autonomous(name="5619 Auto Ian", group="Linear Opmode")
+public class auto extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motorFrontLeft = null;
-    private DcMotor motorFrontRight = null;
-    private DcMotor motorBackLeft = null;
-    private DcMotor motorBackRight = null;
+    private DcMotor leftDrive = null;
+    private DcMotor rightDrive = null;
 
     @Override
     public void runOpMode() {
@@ -64,66 +66,26 @@ public class competitionAuto extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        motorFrontLeft  = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        motorFrontRight= hardwareMap.get(DcMotor.class, "motorFrontRight");
-        motorBackLeft  = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        motorBackRight= hardwareMap.get(DcMotor.class, "motorBackRight");
+        leftDrive  = hardwareMap.get(DcMotor.class, "left");
+        rightDrive = hardwareMap.get(DcMotor.class, "right");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        motorFrontLeft.setDirection(DcMotor.Direction.FORWARD);
-        motorBackLeft.setDirection(DcMotor.Direction.FORWARD);
-        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
-        motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-
-        float distanceInOneSecond = (54-18);
-        float degreesInOneSecond = 200;
-
-
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
-
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
-
             // Send calculated power to wheels
-           Drive(1,0);
-           float distance = (float) ( 10.0/distanceInOneSecond)*1000;
-            telemetry.addData("move 10", "(%.2f)", (float) distance);
-            sleep( (long) distance);
-
-            Stop(100);
-
-            //it turns.
-            Drive(0,-1);
-            float rotation = (float) (90.0/degreesInOneSecond)*1000;
-            sleep((long) rotation);
-
-            Stop(150);
-
-            Drive(1,0);
-            distance = (float) (32.0/distanceInOneSecond)*1000;
-            telemetry.addData("move 32", "(%.2f)", (float) distance);
-            telemetry.update();
-            sleep( (long) distance);
-
-            Stop(150);
-
-        }
-    }//it makes it easy to read
-    void Drive(double move, double turn){
-        double leftPower = move-turn;
-        double rightPower = move+turn;
-        motorFrontLeft.setPower(rightPower);
-        motorFrontRight.setPower(leftPower);
-        motorBackLeft.setPower(rightPower);
-        motorBackRight.setPower(leftPower);
-    }
-    void Stop(long howlongtowait){
-
-        Drive(0,0);
-        sleep(howlongtowait);
-    }
-}
+            leftDrive.setPower(1.0);
+            rightDrive.setPower(1.0);
+            sleep(1000);
+            leftDrive.setPower(1.0);
+            rightDrive.setPower(0.0);
+            sleep(1000);
+            leftDrive.setPozzwer(0.0);
+            rightDrive.setpower(1.0);
+            sleep(1000);
