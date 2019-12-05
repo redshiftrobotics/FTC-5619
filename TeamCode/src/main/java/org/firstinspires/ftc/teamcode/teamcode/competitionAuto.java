@@ -137,6 +137,8 @@ public class competitionAuto extends LinearOpMode {
             telemetry.addData("move 10", "(%.2f)", (float) distance);
             Stop(100);
         }
+
     }
+    int distanceInOneSecond = (54 -18);
 
 }
