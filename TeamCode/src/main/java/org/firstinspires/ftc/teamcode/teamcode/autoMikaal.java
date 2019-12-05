@@ -20,7 +20,7 @@ package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, HI WOW YOU READ THIS PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -46,13 +46,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto", group="Linear Opmode")
-public class autoMikaal extends LinearOpMode {
+@Autonomous(name="5619 Auto Competition Left", group="Linear Opmode")
+public class competitionAuto extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
+    private DcMotor motorFrontLeft = null;
+    private DcMotor motorFrontRight = null;
+    private DcMotor motorBackLeft = null;
+    private DcMotor motorBackRight = null;
 
     @Override
     public void runOpMode() {
@@ -62,33 +64,96 @@ public class autoMikaal extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left");
-        rightDrive = hardwareMap.get(DcMotor.class, "right");
+        motorFrontLeft  = hardwareMap.get(DcMotor.class, "motorFrontLeft");
+        motorFrontRight= hardwareMap.get(DcMotor.class, "motorFrontRight");
+        motorBackLeft  = hardwareMap.get(DcMotor.class, "motorBackLeft");
+        motorBackRight= hardwareMap.get(DcMotor.class, "motorBackRight");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        motorFrontLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorBackLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
+        motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        runtime.reset(17);
+        runtime.reset();
+
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
-            // Send calculated power to wheels
-            //leftDrive.setPower(1.0);
-            //rightDrive.setPower(1.0);
-            //sleep(5000);
 
-            moveInInches(12);
-          Turn(-90)
-moveInInches(12)
-Turn(90)
+            // Send calculated power to wheels
+            Drive(1,0);
+            float distance = (float) ( 10.0/distanceInOneSecond)*1000;
+            telemetry.addData("move 10", "(%.2f)", (float) distance);
+            sleep( (long) distance);
+
+            Stop(100);
+
+            //it turns.
+            Drive(0,-1);
+            float rotation = (float) (90.0/degreesInOneSecond)*1000;
+            sleep((long) rotation);
+
+            Stop(150);
+
+            Drive(1,0);
+            distance = (float) (32.0/distanceInOneSecond)*1000;
+            telemetry.addData("move 32", "(%.2f)", (float) distance);
+            telemetry.update();
+            sleep( (long) distance);
+
+            Stop(150);
+
+        }
+    }//it makes it easy to read
+    void Drive(double move, double turn){
+        double leftPower = move-turn;
+        double rightPower = move+turn;
+        motorFrontLeft.setPower(rightPower);
+        motorFrontRight.setPower(leftPower);
+        motorBackLeft.setPower(rightPower);
+        motorBackRight.setPower(leftPower);
+    }
+    //figure it out
+    void Stop(long howlongtowait){
+
+        Drive(0,0);
+        sleep(howlongtowait);
+    }
+    void moveInInches(double howFarToGo) {
+        float distanceInOneSecond = (54 - 18);
+        if (0 > howFarToGo) {
+            Drive(-1, 0);
+            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+            sleep((long) -distance);
+            telemetry.addData("move 10", "(%.2f)", (float) distance);
+            Stop(100);
+
+        } else {
+            Drive(1, 0);
+            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+            telemetry.addData("move 10", "(%.2f)", (float) distance);
+            Stop(100);
         }
 
-        public void moveInInches(int howManyInches) {}
-
-        public void Turn(int radius) {}
-        //
     }
+    void Win(){
+
+        moveInInches(12);
+        Turn(-90);
+        moveInInches(12);
+        Turn(90);
+        moveInInches(48);
+        Turn(135);
+        moveInInches(12);
+        moveInInches(72);
+        moveInInches(-6);
+        Turn(135);
+        moveInInches(36);
+    }
+
+    int distanceInOneSecond = (54 -18);
+
 }

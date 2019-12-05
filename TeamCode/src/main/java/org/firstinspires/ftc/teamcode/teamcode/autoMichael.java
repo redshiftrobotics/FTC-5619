@@ -105,3 +105,14 @@ public class autoMichael extends LinearOpMode {
         }
     }
 }
+    moveInInches(12);
+    Turn(-90)
+    moveInInches(12)
+    Turn(90)
+    moveInInches(48)
+    Turn(135)
+    moveInInches(12)
+    moveInInches(72)
+    moveInInches(-6)
+    Turn(135)
+    moveInInches(36) }
