@@ -82,16 +82,10 @@ public class auto1 extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
             // Send calculated power to wheels
-           Drive(1,0);
+           Drive(0,1);
             sleep(1000);
            Drive(0,0);
             sleep(5000);
-           Drive(0,-1);
-           sleep(1000);
-            Drive(0,0);
-
-
-
 
         }
     }

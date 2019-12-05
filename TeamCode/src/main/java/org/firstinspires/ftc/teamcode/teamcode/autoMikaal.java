@@ -142,18 +142,20 @@ public class competitionAuto extends LinearOpMode {
     void Win(){
 
         moveInInches(12);
-        Turn(-90);
+        turn(-90);
         moveInInches(12);
-        Turn(90);
+        turn(90);
         moveInInches(48);
-        Turn(135);
+        turn(135);
         moveInInches(12);
         moveInInches(72);
         moveInInches(-6);
-        Turn(135);
+        turn(135);
         moveInInches(36);
+
     }
 
     int distanceInOneSecond = (54 -18);
+    int degreesInOneSecond =
 
 }

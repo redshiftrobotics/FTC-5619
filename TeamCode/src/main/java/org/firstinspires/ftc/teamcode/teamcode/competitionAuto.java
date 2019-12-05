@@ -139,6 +139,7 @@ public class competitionAuto extends LinearOpMode {
         }
 
     }
-    int distanceInOneSecond = (54 -18);
+    int distanceInOneSecond = (54 - 18);
+    int degreesInOneSecond =
 
 }
