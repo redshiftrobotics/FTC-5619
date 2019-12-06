@@ -58,6 +58,7 @@ public class competition2Auto extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -68,6 +69,8 @@ public class competition2Auto extends LinearOpMode {
         motorFrontRight = hardwareMap.get(DcMotor.class, "motorFrontRight");
         motorBackLeft = hardwareMap.get(DcMotor.class, "motorBackLeft");
         motorBackRight = hardwareMap.get(DcMotor.class, "motorBackRight");
+        // TODO: register  5th motor for hook.
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -75,6 +78,7 @@ public class competition2Auto extends LinearOpMode {
         motorBackLeft.setDirection(DcMotor.Direction.FORWARD);
         motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
+        // TODO: 5th motor for hook.
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -83,31 +87,32 @@ public class competition2Auto extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
 
-            int distanceInOneSecond = 54 - 18;
-            int degreesInOneSecond = 90;
-
-            // Send calculated power to wheels
-            Drive(1, 0);
-            float distance = (float) (10.0 / distanceInOneSecond) * 1000;
-            telemetry.addData("move 10", "(%.2f)", (float) distance);
-            sleep((long) distance);
-
-            Stop(100);
-
-            //it turns.
-            Drive(0, -1);
-            float rotation = (float) (90.0 / degreesInOneSecond) * 1000;
-            sleep((long) rotation);
-
-            Stop(150);
-
-            Drive(1, 0);
-            distance = (float) (32.0 / distanceInOneSecond) * 1000;
-            telemetry.addData("move 32", "(%.2f)", (float) distance);
-            telemetry.update();
-            sleep((long) distance);
-
-            Stop(150);
+            MoveTheTrayAndPark();
+//            int distanceInOneSecond = 54 - 18;
+//            int degreesInOneSecond = 90;
+//
+//            // Send calculated power to wheels
+//            Drive(1, 0);
+//            float distance = (float) (10.0 / distanceInOneSecond) * 1000;
+//            telemetry.addData("move 10", "(%.2f)", (float) distance);
+//            sleep((long) distance);
+//
+//            Stop(100);
+//
+//            //it turns.
+//            Drive(0, -1);
+//            float rotation = (float) (90.0 / degreesInOneSecond) * 1000;
+//            sleep((long) rotation);
+//
+//            Stop(150);
+//
+//            Drive(1, 0);
+//            distance = (float) (32.0 / distanceInOneSecond) * 1000;
+//            telemetry.addData("move 32", "(%.2f)", (float) distance);
+//            telemetry.update();
+//            sleep((long) distance);
+//
+//            Stop(150);
 
         }
     }//it makes it easy to read
@@ -147,4 +152,33 @@ public class competition2Auto extends LinearOpMode {
 
     }
 
+    void MoveTheTrayAndPark(){
+
+        moveInInches(12);
+        Turn(-90);
+        moveInInches(12);
+        Turn(90);
+        moveInInches(48);
+        Turn(135);
+        moveInInches(12);
+        moveInInches(72);
+        deployHook();
+        moveInInches(-6);
+        Turn(135);
+        moveInInches(36);
+    }
+
+    void Turn(int degrees) {
+
+        int degreesInOneSecond = 90;
+
+        //it turns.
+        Drive(0, -1);
+        float howLongToBeOn = (float) (degrees / degreesInOneSecond) * 1000;
+        sleep((long) howLongToBeOn);
+    }
+
+    void deployHook(){
+        //write code here
+    }
 }

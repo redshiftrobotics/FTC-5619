@@ -128,23 +128,22 @@ public class competitionAuto extends LinearOpMode {
         sleep(howlongtowait);
     }
 
-    void moveInInches(double howFarToGo) {
-
-        float distanceInOneSecond = (54 - 18);
-        if (0 > howFarToGo) {
-            Drive(-1, 0);
-            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
-            sleep((long) -distance);
-            telemetry.addData("move 10", "(%.2f)", (float) distance);
-            Stop(100);
-
-        } else {
-            Drive(1, 0);
-            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
-            telemetry.addData("move 10", "(%.2f)", (float) distance);
-            Stop(100);
-        }
-
-    }
-
+//    void moveInInches(double howFarToGo) {
+//
+//        float distanceInOneSecond = (54 - 18);
+//        if (0 > howFarToGo) {
+//            Drive(-1, 0);
+//            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+//            sleep((long) -distance);
+//            telemetry.addData("move 10", "(%.2f)", (float) distance);
+//            Stop(100);
+//
+//        } else {
+//            Drive(1, 0);
+//            float distance = (float) (howFarToGo / distanceInOneSecond) * 1000;
+//            telemetry.addData("move 10", "(%.2f)", (float) distance);
+//            Stop(100);
+//        }
+//
+//    }
 }
