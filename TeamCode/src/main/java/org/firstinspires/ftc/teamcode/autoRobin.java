@@ -62,7 +62,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left");
+        leftDrive = hardwareMap.get(DcMotor.class, "left");
         rightDrive = hardwareMap.get(DcMotor.class, "right");
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -84,5 +84,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             sleep(1000);
             leftDrive.setPower(0.0);
             rightDrive.setPower(0.0);
+        }
     }
 }

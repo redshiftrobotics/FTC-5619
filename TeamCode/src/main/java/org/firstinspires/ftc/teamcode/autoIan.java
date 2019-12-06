@@ -51,7 +51,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @Autonomous(name="5619 Auto Ian", group="Linear Opmode")
-public class auto extends LinearOpMode {
+public class autoIan extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -66,7 +66,7 @@ public class auto extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left");
+        leftDrive = hardwareMap.get(DcMotor.class, "left");
         rightDrive = hardwareMap.get(DcMotor.class, "right");
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -86,6 +86,9 @@ public class auto extends LinearOpMode {
             leftDrive.setPower(1.0);
             rightDrive.setPower(0.0);
             sleep(1000);
-            leftDrive.setPozzwer(0.0);
-            rightDrive.setpower(1.0);
+            leftDrive.setPower(0.0);
+            rightDrive.setPower(1.0);
             sleep(1000);
+        }
+    }
+}

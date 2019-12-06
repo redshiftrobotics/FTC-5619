@@ -64,10 +64,10 @@ public class competitionAutoOpposite extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        motorFrontLeft  = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        motorFrontRight= hardwareMap.get(DcMotor.class, "motorFrontRight");
-        motorBackLeft  = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        motorBackRight= hardwareMap.get(DcMotor.class, "motorBackRight");
+        motorFrontLeft = hardwareMap.get(DcMotor.class, "motorFrontLeft");
+        motorFrontRight = hardwareMap.get(DcMotor.class, "motorFrontRight");
+        motorBackLeft = hardwareMap.get(DcMotor.class, "motorBackLeft");
+        motorBackRight = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -76,9 +76,8 @@ public class competitionAutoOpposite extends LinearOpMode {
         motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 
-        float distanceInOneSecond = (54-18);
+        float distanceInOneSecond = (54 - 18);
         float degreesInOneSecond = 200;
-
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -89,64 +88,65 @@ public class competitionAutoOpposite extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Send calculated power to wheels
-            Drive(1,0);
-            float distance = (float) ( 10.0/distanceInOneSecond)*1000;
+            Drive(1, 0);
+            float distance = (float) (10.0 / distanceInOneSecond) * 1000;
             telemetry.addData("move 10", "(%.2f)", (float) distance);
-            sleep( (long) distance);
+            sleep((long) distance);
 
             Stop(100);
 
             //it turns.
-            Drive(0,1);
-            float rotation = (float) (90.0/degreesInOneSecond)*1000;
+            Drive(0, 1);
+            float rotation = (float) (90.0 / degreesInOneSecond) * 1000;
             sleep((long) rotation);
 
             Stop(150);
 
-            Drive(1,0);
-            distance = (float) (32.0/distanceInOneSecond)*1000;
+            Drive(1, 0);
+            distance = (float) (32.0 / distanceInOneSecond) * 1000;
             telemetry.addData("move 32", "(%.2f)", (float) distance);
             telemetry.update();
-            sleep( (long) distance);
+            sleep((long) distance);
 
             Stop(150);
 
         }
     }//it makes it easy to read
-    void Drive(double move, double turn){
-        double leftPower = move-turn;
-        double rightPower = move+turn;
+
+    void Drive(double move, double turn) {
+        double leftPower = move - turn;
+        double rightPower = move + turn;
         motorFrontLeft.setPower(rightPower);
         motorFrontRight.setPower(leftPower);
         motorBackLeft.setPower(rightPower);
         motorBackRight.setPower(leftPower);
     }
-    //figure it out
-    void Stop(long howlongtowait){
 
-        Drive(0,0);
+    //figure it out
+    void Stop(long howlongtowait) {
+
+        Drive(0, 0);
         sleep(howlongtowait);
     }
 
-    void turn(double turndegrees){
-
-        float degreesInOneSecond = 150;
-
-        if (0 > turn){
-
-            Drive(0, -1);
-            float rotation = (float) (turn / degreesInOneSecond) * 1000;
-            sleep((long) -rotation);
-            Stop(100);
-
-        } else {
-
-            Drive(0, 1);
-            float rotation = (float) (turndegrees / degreesInOneSecond) * 1000;
-            sleep((long) rotation);
-            Stop(100);
-
-        }
-
-    }
+//    void turn(double turndegrees){
+//
+//        float degreesInOneSecond = 150;
+//
+//        if (0 > turn){
+//
+//            Drive(0, -1);
+//            float rotation = (float) (turn / degreesInOneSecond) * 1000;
+//            sleep((long) -rotation);
+//            Stop(100);
+//
+//        } else {
+//
+//            Drive(0, 1);
+//            float rotation = (float) (turndegrees / degreesInOneSecond) * 1000;
+//            sleep((long) rotation);
+//            Stop(100);
+//
+//        }
 }
+

@@ -47,7 +47,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="5619 Auto Competition Left", group="Linear Opmode")
-public class competitionAuto extends LinearOpMode {
+public class autoMikaal extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -82,6 +82,9 @@ public class competitionAuto extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         if (opModeIsActive()) {
+
+            int distanceInOneSecond = 54 - 18;
+            int degreesInOneSecond = 90;
 
             // Send calculated power to wheels
             Drive(1,0);
@@ -139,23 +142,23 @@ public class competitionAuto extends LinearOpMode {
         }
 
     }
-    void Win(){
+//    void Win(){
+//
+//        moveInInches(12);
+//        turn(-90);
+//        moveInInches(12);
+//        turn(90);
+//        moveInInches(48);
+//        turn(135);
+//        moveInInches(12);
+//        moveInInches(72);
+//        moveInInches(-6);
+//        turn(135);
+//        moveInInches(36);
+//
+//    }
 
-        moveInInches(12);
-        turn(-90);
-        moveInInches(12);
-        turn(90);
-        moveInInches(48);
-        turn(135);
-        moveInInches(12);
-        moveInInches(72);
-        moveInInches(-6);
-        turn(135);
-        moveInInches(36);
-
-    }
-
-    int distanceInOneSecond = (54 -18);
-    int degreesInOneSecond =
+//    int distanceInOneSecond = (54 -18);
+//    int degreesInOneSecond =
 
 }
