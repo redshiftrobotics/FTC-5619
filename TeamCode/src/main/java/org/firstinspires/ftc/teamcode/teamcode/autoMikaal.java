@@ -142,23 +142,33 @@ public class autoMikaal extends LinearOpMode {
         }
 
     }
-//    void Win(){
-//
-//        moveInInches(12);
-//        turn(-90);
-//        moveInInches(12);
-//        turn(90);
-//        moveInInches(48);
-//        turn(135);
-//        moveInInches(12);
-//        moveInInches(72);
-//        moveInInches(-6);
-//        turn(135);
-//        moveInInches(36);
-//
-//    }
+    void Win(){
 
-//    int distanceInOneSecond = (54 -18);
-//    int degreesInOneSecond =
+        moveInInches(12);
+        Turn(-90);
+        moveInInches(12);
+       Turn(90);
+        moveInInches(48);
+        Turn(135);
+       moveInInches(12);
+        moveInInches(72);
+        moveInInches(-6);
+        Turn(135);
+        moveInInches(36);
+
+    }
+    void Turn(int degrees){
+
+        int degreesInOneSecond = 90;
+
+        //it turns.
+        Drive(0,-1);
+        float howLongToBeOn = (float) (degrees/degreesInOneSecond)*1000;
+        sleep((long) howLongToBeOn);
+
+    }
+
+    //int distanceInOneSecond = (54 -18);
+    //int degreesInOneSecond =
 
 }
