@@ -30,6 +30,7 @@ package org.firstinspires.ftc.teamcode.teamcode;/* Copyright (c) 2017 FIRST. All
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -55,6 +56,7 @@ public class competitionAuto extends LinearOpMode {
     private DcMotor motorFrontRight = null;
     private DcMotor motorBackLeft = null;
     private DcMotor motorBackRight = null;
+    private Servo hook = null;
 
     @Override
     public void runOpMode() {
@@ -68,6 +70,7 @@ public class competitionAuto extends LinearOpMode {
         motorFrontRight = hardwareMap.get(DcMotor.class, "motorFrontRight");
         motorBackLeft = hardwareMap.get(DcMotor.class, "motorBackLeft");
         motorBackRight = hardwareMap.get(DcMotor.class, "motorBackRight");
+        hook = hardwareMap.servo.get("hook");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery

@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -57,6 +58,7 @@ public class teleop extends LinearOpMode {
     private DcMotor motor1 = null;
     private DcMotor motor2 = null;
     private DcMotor motor3 = null;
+    private Servo hook = null;
 
     @Override
     public void runOpMode() {
@@ -70,6 +72,9 @@ public class teleop extends LinearOpMode {
         motor1= hardwareMap.get(DcMotor.class, "motor1");
         motor2  = hardwareMap.get(DcMotor.class, "motor2");
         motor3= hardwareMap.get(DcMotor.class, "motor3");
+        hook = hardwareMap.servo.get("hook");
+
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
