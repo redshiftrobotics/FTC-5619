@@ -46,7 +46,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="5619 Auto Competition Left", group="Linear Opmode")
+@Autonomous(name="5619 autoMikaal", group="Linear Opmode")
 public class autoMikaal extends LinearOpMode {
 
     // Declare OpMode members.

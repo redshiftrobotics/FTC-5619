@@ -161,8 +161,7 @@ public class competition2Auto extends LinearOpMode {
         Turn(90);
         moveInInches(48);
         Turn(135);
-        moveInInches(12);
-        moveInInches(72);
+        moveInInches(85);
         deployHook();
         moveInInches(-6);
         Turn(135);

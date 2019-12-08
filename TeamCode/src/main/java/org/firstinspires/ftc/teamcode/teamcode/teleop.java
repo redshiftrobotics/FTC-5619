@@ -92,7 +92,7 @@ public class teleop extends LinearOpMode {
         motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 
-        hookPosition = .5;
+        hookPosition = 0;
         armGPosition = .5;
         armServPosition = .5;
 
@@ -130,15 +130,28 @@ public class teleop extends LinearOpMode {
             Drive(move,turn);
 
             // new servos!
-            if(gamepad2.y) hookPosition += .01;
-            if(gamepad2.a)hookPosition -= .01;
+            if(gamepad2.y) hookPosition += .001;
+            if(gamepad2.a) hookPosition -= .001;
+            if(gamepad2.x) armGPosition += .001;
+            if(gamepad2.b) armGPosition -= .001;
+            if(gamepad2.dpad_up) armServPosition += .001;
+            if(gamepad2.dpad_down) armServPosition -= .001;
 
-            hook.setPosition(Range.clip(hookPosition, MIN_POSITION, MAX_POSITION));
-                    
+            armGPosition = Range.clip(armGPosition, MIN_POSITION, MAX_POSITION);
+            armServPosition = Range.clip(armServPosition, MIN_POSITION, MAX_POSITION);
+            hookPosition = Range.clip(hookPosition, MIN_POSITION, 0.7);
+
+
+            hook.setPosition(hookPosition);
+            ArmServ.setPosition(armServPosition);
+            ArmG.setPosition(armGPosition);
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Direction", "move (%.2f), turn (%.2f)", move, turn);
+            telemetry.addData("Hook", "hookTarget: (%.2f), hookCurrent: (%.2f)", hookPosition, hook.getPosition());
+            telemetry.addData("Arm", "serv: (%.2f), servTgt: (%.2f), g: (%.2f), gTgt: (%.2f)", armGPosition, ArmG.getPosition(), armServPosition, ArmServ.getPosition());
             telemetry.update();
         }
     }
@@ -146,10 +159,10 @@ public class teleop extends LinearOpMode {
     void Drive(double move, double turn){
         double leftPower = move-turn;
         double rightPower = move+turn;
-        motor0.setPower(rightPower);
-        motor1.setPower(leftPower);
-        motor2.setPower(rightPower);
-        motor3.setPower(leftPower);
+        motorFrontLeft.setPower(rightPower);
+        motorFrontRight.setPower(leftPower);
+        motorBackLeft.setPower(rightPower);
+        motorBackRight.setPower(leftPower);
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
     }
 }
