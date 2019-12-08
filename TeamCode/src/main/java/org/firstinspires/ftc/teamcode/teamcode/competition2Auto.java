@@ -80,7 +80,6 @@ public class competition2Auto extends LinearOpMode {
         motorBackLeft.setDirection(DcMotor.Direction.FORWARD);
         motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        // TODO: 5th motor for hook.
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
